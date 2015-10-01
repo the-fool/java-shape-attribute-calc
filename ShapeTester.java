@@ -5,13 +5,14 @@ import java.util.Arrays;
 abstract class Shape {
 	public abstract double getArea();
 	public abstract String getDescription(String type);
+	public abstract String getDescription();
 }
 
 abstract class TwoDimensionalShape extends Shape {
 	
 	@Override
 	public String getDescription(String type) {
-		return "Two-Dimensional Shape: " + type + " - area: " + getArea();
+		return "Two-Dimensional Shape: " + type + ": area: " + getArea();
 	}
 }
 
@@ -20,7 +21,7 @@ abstract class ThreeDimensionalShape extends Shape {
 	
 	@Override
 	public String getDescription(String type) {
-		return "Three-Dimensional Shape: " + type + " - area: " + getArea() + ", volume " + getVolume();	
+		return "Three-Dimensional Shape: " + type + ": area: " + getArea() + ", volume " + getVolume();	
 		}
 	
 }
@@ -222,7 +223,10 @@ public class ShapeTester {
 		array[3] = new Sphere(10);
 		array[4] = new Cube(9);
 		array[5] = new RegularTetrahedron(13);
-		
+
+		for (Shape a : array) {
+			System.out.println(a.getDescription());
+		}
 
 	}
 
