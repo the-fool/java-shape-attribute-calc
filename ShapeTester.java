@@ -4,14 +4,14 @@ import java.util.Arrays;
 
 abstract class Shape {
 	public abstract double getArea();
-	public abstract String getDescription();
+	public abstract String getDescription(String type);
 }
 
 abstract class TwoDimensionalShape extends Shape {
 	
 	@Override
-	public String getDescription() {
-		return "Two-Dimensional Shape";
+	public String getDescription(String type) {
+		return "Two-Dimensional Shape: " + type + " - area: " + getArea();
 	}
 }
 
@@ -19,9 +19,10 @@ abstract class ThreeDimensionalShape extends Shape {
 	public abstract double getVolume();
 	
 	@Override
-	public String getDescription() {
-		return "Three-Dimensional Shape";
-	}
+	public String getDescription(String type) {
+		return "Three-Dimensional Shape: " + type + " - area: " + getArea() + ", volume " + getVolume();	
+		}
+	
 }
 
 class Circle extends TwoDimensionalShape {
@@ -34,9 +35,9 @@ class Circle extends TwoDimensionalShape {
 	public Circle(double r) {
 		radius = Math.abs(r);
 	}
-	@Override
+	
 	public String getDescription() {
-		return (super.getDescription() + ": Circle: radius (" + radius + ") - Area: " + getArea());
+		return (super.getDescription("Circle: radius (" + radius + ")"));
 	}
 	
 	@Override
@@ -70,11 +71,10 @@ class Triangle extends TwoDimensionalShape {
 		return sideA * sideB * Math.cos(sideC) / 2;
 	}
 	
-	@Override
 	public String getDescription() {
-		return (super.getDescription() + ": Triangle: sides (" 
-	        + sideA + ", " + sideB + ", " + sideC + 
-	        ") - Area: " + getArea());
+		return (super.getDescription("Triangle: sides (" 
+		        + sideA + ", " + sideB + ", " + sideC + 
+		        ")"));
 	}
 }
 
@@ -88,9 +88,9 @@ class Square extends TwoDimensionalShape {
 	Square(double s) {
 		side = Math.abs(s);
 	}
-	@Override
+	
 	public String getDescription() {
-		return (super.getDescription() + ": Square: side (" + side + ") - area: " + getArea());
+		return super.getDescription("Square: side (" + side + ")"); 
 	}
 	@Override
 	public double getArea() {
@@ -118,11 +118,10 @@ class Sphere extends ThreeDimensionalShape {
 	public double getArea() {
 		return 4 * Math.PI * radius * radius;
 	}
-	
-	@Override
+
 	public String getDescription() {
-		return (super.getDescription() + ": Sphere : radius (" + radius + 
-				") - surface: " + getArea() + ", volume: " + getVolume());
+		return super.getDescription("Sphere : radius (" + radius + 
+				")");
 	}
 }
 
@@ -144,6 +143,36 @@ class Cube extends ThreeDimensionalShape {
 	@Override
 	public double getArea() {
 		return 6 * side * side;
+	}
+
+	public String getDescription() {
+		return super.getDescription("Cube: side (" + side + ")");
+	}
+}
+
+class RegularTetrahedron extends ThreeDimensionalShape {
+	private static final double DEFAULT_SIDE = 1;
+	private final double side;
+	
+	RegularTetrahedron() {
+		this(DEFAULT_SIDE);
+	}
+	RegularTetrahedron(double s) {
+		side = Math.abs(s);
+	}
+	
+	@Override
+	public double getVolume() {
+		return Math.pow(side, 3) / (6 * Math.pow(2, .5));
+	}
+	
+	@Override
+	public double getArea() {
+		return Math.pow(3, .5) * side * side;
+	}
+	
+	public String getDescription() {
+		return super.getDescription("Regular Tetrahedron: side (" + side + ")");
 	}
 	
 }
