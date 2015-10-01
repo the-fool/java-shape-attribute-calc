@@ -33,7 +33,14 @@ class Circle extends TwoDimensionalShape {
 		this(DEFAULT_RADIUS);
 	}
 	public Circle(double r) {
-		radius = Math.abs(r);
+		try {
+			if (r <= 0) {
+				throw new IllegalArgumentException("Invalid argument - setting to default");
+			}
+		} catch (IllegalArgumentException e) {
+			r = DEFAULT_RADIUS;
+		}
+		radius = r;
 	}
 	
 	public String getDescription() {
@@ -59,7 +66,7 @@ class Triangle extends TwoDimensionalShape {
 		sideA = ar[2]; sideB = ar[1]; sideC = ar[0];
 		try {
 			if (a > (b + c)) {
-				throw new IllegalArgumentException("Invalid side length - setting to default");
+				throw new IllegalArgumentException("Invalid argument - setting to default");
 			}
 		} catch (IllegalArgumentException e) {
 			sideA = sideB = sideC = 1;
@@ -86,7 +93,14 @@ class Square extends TwoDimensionalShape {
 		this(DEFAULT_SIDE);
 	}
 	Square(double s) {
-		side = Math.abs(s);
+		try {
+			if (s <= 0) {
+				throw new IllegalArgumentException("Invalid argument - setting to default");
+			}
+		} catch (IllegalArgumentException e) {
+			s = DEFAULT_SIDE;
+		}
+		side = s;
 	}
 	
 	public String getDescription() {
@@ -106,7 +120,14 @@ class Sphere extends ThreeDimensionalShape {
 		this(DEFAULT_RADIUS);
 	}
 	Sphere(double r) {
-		radius = Math.abs(r);
+		try {
+			if (r <= 0) {
+				throw new IllegalArgumentException("Invalid argument - setting to default");
+			}
+		} catch (IllegalArgumentException e) {
+			r = DEFAULT_RADIUS;
+		}
+		radius = r;
 	}
 	
 	@Override
@@ -133,7 +154,14 @@ class Cube extends ThreeDimensionalShape {
 		this(DEFAULT_SIDE);
 	}
 	Cube(double s) {
-		side = Math.abs(s);
+		try {
+			if (s <= 0) {
+				throw new IllegalArgumentException("Invalid argument - setting to default");
+			}
+		} catch (IllegalArgumentException e) {
+			s = DEFAULT_SIDE;
+		}
+		side = s;
 	}
 	@Override
 	public double getVolume() {
@@ -158,7 +186,14 @@ class RegularTetrahedron extends ThreeDimensionalShape {
 		this(DEFAULT_SIDE);
 	}
 	RegularTetrahedron(double s) {
-		side = Math.abs(s);
+		try {
+			if (s <= 0) {
+				throw new IllegalArgumentException("Invalid argument - setting to default");
+			}
+		} catch (IllegalArgumentException e) {
+			s = DEFAULT_SIDE;
+		}
+		side = s;
 	}
 	
 	@Override
@@ -180,7 +215,14 @@ class RegularTetrahedron extends ThreeDimensionalShape {
 public class ShapeTester {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		Shape [] array = new Shape[6];
+		array[0] = new Circle(4.1);
+		array[1] = new Square(3.1);
+		array[2] = new Triangle(3,3,3);
+		array[3] = new Sphere(10);
+		array[4] = new Cube(9);
+		array[5] = new RegularTetrahedron(13);
+		
 
 	}
 
